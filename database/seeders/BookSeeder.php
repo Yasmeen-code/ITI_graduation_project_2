@@ -17,20 +17,42 @@ class BookSeeder extends Seeder
             'author' => 'F. Scott Fitzgerald',
             'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
             'available_copies' => 3,
+            'image' => 'images/1.png',
         ]);
-
         Book::create([
-            'title' => '1984',
-            'author' => 'George Orwell',
-            'description' => 'A dystopian novel about totalitarianism and surveillance.',
-            'available_copies' => 5,
+            'title' => 'The Great Gatsby',
+            'author' => 'F. Scott Fitzgerald',
+            'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
+            'available_copies' => 3,
+            'image' => 'images/1.png',
         ]);
-
         Book::create([
-            'title' => 'To Kill a Mockingbird',
-            'author' => 'Harper Lee',
-            'description' => 'A novel about racial injustice in the Deep South.',
-            'available_copies' => 2,
+            'title' => 'The Great Gatsby',
+            'author' => 'F. Scott Fitzgerald',
+            'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
+            'available_copies' => 3,
+            'image' => 'images/1.png',
+        ]);
+        Book::create([
+            'title' => 'The Great Gatsby',
+            'author' => 'F. Scott Fitzgerald',
+            'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
+            'available_copies' => 3,
+            'image' => 'images/1.png',
+        ]);
+        Book::create([
+            'title' => 'The Great Gatsby',
+            'author' => 'F. Scott Fitzgerald',
+            'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
+            'available_copies' => 3,
+            'image' => 'images/1.png',
+        ]);
+        Book::create([
+            'title' => 'The Great Gatsby',
+            'author' => 'F. Scott Fitzgerald',
+            'description' => 'A novel set in the Roaring Twenties, exploring themes of wealth, love, and the American Dream.',
+            'available_copies' => 3,
+            'image' => 'images/1.png',
         ]);
     }
 }

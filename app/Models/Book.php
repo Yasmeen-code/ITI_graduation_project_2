@@ -19,6 +19,7 @@ class Book extends Model
         'author',
         'description',
         'available_copies',
+        'image',
     ];
 
     /**

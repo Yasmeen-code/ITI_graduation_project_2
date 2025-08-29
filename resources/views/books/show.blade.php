@@ -60,9 +60,17 @@
                     <!-- Book Cover -->
                     <div class="lg:col-span-1 bg-gradient-to-br from-blue-500 to-purple-600 p-12 flex items-center justify-center">
                         <div class="text-center">
-                            <div class="w-32 h-40 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-book text-white text-5xl"></i>
-                            </div>
+                            @if($book->images && count($book->images) > 0)
+                                <img src="{{ asset('/' . $book->images[0]) }}" alt="{{ $book->title }}" class="w-32 h-40 rounded-xl object-cover mx-auto mb-6" />
+                            @else
+                            @if($book->image)
+                                <img src="{{ asset($book->image) }}" alt="{{ $book->title }}" class="w-32 h-40 rounded-xl object-cover mx-auto mb-6" />
+                            @else
+                                <div class="w-32 h-40 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-6">
+                                    <i class="fas fa-book text-white text-5xl"></i>
+                                </div>
+                            @endif
+                            @endif
                             <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">
                                 <i class="fas fa-copy text-white text-sm mr-2"></i>
                                 <span class="text-white text-sm font-semibold">{{ $book->available_copies }} available</span>

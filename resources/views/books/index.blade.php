@@ -68,9 +68,13 @@
                                 </span>
                             </div>
                             <div class="absolute bottom-4 left-4">
-                                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-book text-white text-xl"></i>
-                                </div>
+                                @if($book->image)
+                                    <img src="{{ asset($book->image) }}" alt="{{ $book->title }}" class="w-20 h-20 rounded-lg object-cover" />
+                                @else
+                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-book text-white text-xl"></i>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         
