@@ -17,7 +17,7 @@
                     <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                         <i class="fas fa-book-open text-white text-lg"></i>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-800 font-['Playfair_Display']">Bibliotheca</h1>
+                    <h1 class="text-2xl font-bold text-gray-800 font-['Playfair_Display']">BookStore</h1>
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
@@ -50,30 +50,6 @@
                 Explore our curated collection of literary treasures. From timeless classics to modern masterpieces, 
                 find the perfect book to ignite your imagination.
             </p>
-        </div>
-
-        <!-- Search and Filter Bar -->
-        <div class="bg-white rounded-2xl shadow-sm p-6 mb-12">
-            <div class="flex flex-col md:flex-row gap-4 items-center">
-                <div class="flex-1 relative">
-                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <input 
-                        type="text" 
-                        placeholder="Search books by title, author, or genre..." 
-                        class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    >
-                </div>
-                <select class="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                    <option>All Categories</option>
-                    <option>Fiction</option>
-                    <option>Non-Fiction</option>
-                    <option>Science Fiction</option>
-                    <option>Mystery</option>
-                </select>
-                <button class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium">
-                    <i class="fas fa-filter mr-2"></i>Filter
-                </button>
-            </div>
         </div>
 
         <!-- Books Grid -->
@@ -150,36 +126,6 @@
             @endif
         </div>
 
-        <!-- Stats Section -->
-        @if($books->count() > 0)
-            <div class="bg-white rounded-2xl shadow-lg p-8 mb-16">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-8 text-center font-['Playfair_Display']">Library Insights</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center p-6 bg-blue-50 rounded-xl">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-book text-blue-600 text-2xl"></i>
-                        </div>
-                        <div class="text-3xl font-bold text-blue-600 mb-2">{{ $books->count() }}</div>
-                        <div class="text-gray-600 font-medium">Total Books</div>
-                    </div>
-                    <div class="text-center p-6 bg-green-50 rounded-xl">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-copy text-green-600 text-2xl"></i>
-                        </div>
-                        <div class="text-3xl font-bold text-green-600 mb-2">{{ $books->sum('available_copies') }}</div>
-                        <div class="text-gray-600 font-medium">Available Copies</div>
-                    </div>
-                    <div class="text-center p-6 bg-purple-50 rounded-xl">
-                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-check-circle text-purple-600 text-2xl"></i>
-                        </div>
-                        <div class="text-3xl font-bold text-purple-600 mb-2">{{ $books->count() - $books->where('available_copies', 0)->count() }}</div>
-                        <div class="text-gray-600 font-medium">Books in Stock</div>
-                    </div>
-                </div>
-            </div>
-        @endif
-
         <!-- Call to Action -->
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
             <h3 class="text-3xl font-bold mb-4 font-['Playfair_Display']">Ready to Start Reading?</h3>
@@ -202,7 +148,7 @@
                         <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                             <i class="fas fa-book-open text-white"></i>
                         </div>
-                        <span class="text-xl font-bold font-['Playfair_Display']">Bibliotheca</span>
+                        <span class="text-xl font-bold font-['Playfair_Display']">BookStore</span>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Your gateway to a world of knowledge and imagination. Discover, borrow, and enjoy.
@@ -223,11 +169,11 @@
                     <ul class="space-y-2 text-gray-400">
                         <li class="flex items-center">
                             <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                            <span>info@bibliotheca.com</span>
+                            <span>YasmeenHana@BookStore.com</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone mr-3 text-blue-400"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span>+20 010 028 135</span>
                         </li>
                     </ul>
                 </div>
@@ -249,7 +195,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Bibliotheca Library Management System. All rights reserved.</p>
+                <p>&copy; 2025 BookStore Library Management System. All rights reserved.</p>
             </div>
         </div>
     </footer>

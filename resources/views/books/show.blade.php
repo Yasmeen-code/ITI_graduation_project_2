@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ $book->title }} - Bibliotheca</title>
+    <title>{{ $book->title }} - BookStore</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
                     <a href="/books" class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center hover:from-blue-700 hover:to-purple-700 transition-colors">
                         <i class="fas fa-arrow-left text-white text-sm"></i>
                     </a>
-                    <h1 class="text-2xl font-bold text-gray-800 font-['Playfair_Display']">Bibliotheca</h1>
+                    <h1 class="text-2xl font-bold text-gray-800 font-['Playfair_Display']">BookStore</h1>
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
@@ -168,7 +168,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 mt-16">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Bibliotheca Library Management System. All rights reserved.</p>
+            <p>&copy; 2025 BookStore Library Management System. All rights reserved.</p>
         </div>
     </footer>
 
