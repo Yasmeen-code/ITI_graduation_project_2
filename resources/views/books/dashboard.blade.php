@@ -29,6 +29,13 @@
                     </a>
                 </nav>
                 
+                <form method="POST" action="{{ route('logout') }}" class="hidden md:block">
+                    @csrf
+                    <button type="submit" class="text-gray-600 hover:text-red-600 transition-colors font-medium">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </form>
+                
                 <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="fas fa-bars text-gray-600 text-xl"></i>
                 </button>
