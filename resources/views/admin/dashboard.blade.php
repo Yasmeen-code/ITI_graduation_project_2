@@ -1,106 +1,90 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Admin Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <main class="py-12 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-8 text-center">
-                <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100 font-['Playfair_Display']">Admin Dashboard</h1>
-                <p class="mt-2 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    Manage your library system, books, users, and borrowing activities.
-                </p>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-2xl"></i>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard - BookStore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-['Inter']">
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-sm border-b border-gray-200/50 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-book-open text-white text-lg"></i>
                     </div>
-                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">{{ $totalBooks }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 font-medium">Total Books</div>
+                    <h1 class="text-2xl font-bold text-gray-800 font-['Playfair_Display']">BookStore</h1>
                 </div>
                 
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-green-600 dark:text-green-400 text-2xl"></i>
-                    </div>
-                    <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">{{ $totalUsers }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 font-medium">Total Users</div>
-                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/admin/dashboard" class="text-blue-600 font-semibold relative group">
+                        Admin
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 transform scale-x-100 transition-transform"></span>
+                    </a>
+                </nav>
                 
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-book-reader text-purple-600 dark:text-purple-400 text-2xl"></i>
-                    </div>
-                    <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">{{ $activeLoans }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 font-medium">Active Loans</div>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-clock text-orange-600 dark:text-orange-400 text-2xl"></i>
-                    </div>
-                    <div class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">{{ $overdueBooks }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 font-medium">Overdue Books</div>
-                </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <a href="/books" class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-book text-blue-600 dark:text-blue-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Manage Books</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">Add, edit, and manage library books</p>
-                </a>
-
-                <a href="/users" class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-green-600 dark:text-green-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Manage Users</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">View and manage user accounts</p>
-                </a>
-
-                <a href="/borrowed-books" class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-exchange-alt text-purple-600 dark:text-purple-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Borrowing Records</h3>
-                    <p class="text-gray-600 dark:text-gray-300 text-sm">Track all borrowing activities</p>
-                </a>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
-                <div class="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
-                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 font-['Playfair_Display']">Recent Activity</h3>
-                </div>
-                <div class="p-8">
-                    <div class="space-y-4">
-                        @if($recentActivities->count() > 0)
-                            @foreach($recentActivities as $activity)
-                                <div class="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-book text-blue-600 dark:text-blue-400"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-gray-800 dark:text-gray-100 font-medium">{{ $activity->description }}</p>
-                                        <p class="text-gray-600 dark:text-gray-300 text-sm">{{ $activity->created_at->diffForHumans() }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <p class="text-gray-600 dark:text-gray-300 text-center py-8">No recent activity</p>
-                        @endif
-                    </div>
-                </div>
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
+                </button>
             </div>
         </div>
-    </main>
-</x-app-layout>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+   
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-16">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6 font-['Playfair_Display']">Quick Actions</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="{{ route('admin.books') }}" class="bg-blue-50 rounded-xl p-6 text-center hover:bg-blue-100 transition-colors group">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-book text-blue-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Manage Books</h4>
+                    <p class="text-gray-600 text-sm">View and manage all books</p>
+                </a>
+                <a href="{{ route('admin.users') }}" class="bg-green-50 rounded-xl p-6 text-center hover:bg-green-100 transition-colors group">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-green-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Manage Users</h4>
+                    <p class="text-gray-600 text-sm">View and manage all users</p>
+                </a>
+                <a href="{{ route('admin.borrowed_books') }}" class="bg-purple-50 rounded-xl p-6 text-center hover:bg-purple-100 transition-colors group">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exchange-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Borrowing History</h4>
+                    <p class="text-gray-600 text-sm">View all borrowing activities</p>
+                </a>
+            </div>
+        </div>
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</body>
+</html>

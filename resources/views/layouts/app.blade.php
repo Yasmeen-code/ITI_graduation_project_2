@@ -30,6 +30,10 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+                
+                @hasSection('content')
+                    @yield('content')
+                @endif
             </main>
         </div>
     </body>

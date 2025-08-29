@@ -19,8 +19,6 @@ class AdminController extends Controller
         $activeLoans = BorrowedBook::where('return_by', '>', now())->count();
         $overdueBooks = BorrowedBook::where('return_by', '<', now())->count();
 
-        // For recent activities, you can create an Activity model or use existing data
-        // For now, we'll use recent borrowed books as placeholder
         $recentActivities = BorrowedBook::with('book', 'user')
             ->orderBy('created_at', 'desc')
             ->take(5)
@@ -39,5 +37,32 @@ class AdminController extends Controller
             'overdueBooks' => $overdueBooks,
             'recentActivities' => $recentActivities
         ]);
+    }
+
+    /**
+     * Display a listing of all users.
+     */
+    public function users()
+    {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
+
+    /**
+     * Display a listing of all books.
+     */
+    public function books()
+    {
+        $books = Book::all();
+        return view('admin.books', compact('books'));
+    }
+
+    /**
+     * Display a listing of all borrowed books.
+     */
+    public function borrowedBooks()
+    {
+        $borrowedBooks = BorrowedBook::with('book', 'user')->get();
+        return view('admin.borrowed_books', compact('borrowedBooks'));
     }
 }

@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 
     // Admin routes
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('admin');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users')->middleware('admin');
+    Route::get('/admin/books', [AdminController::class, 'books'])->name('admin.books')->middleware('admin');
+    Route::get('/admin/borrowed-books', [AdminController::class, 'borrowedBooks'])->name('admin.borrowed_books')->middleware('admin');
 });
 
 require __DIR__ . '/auth.php';
