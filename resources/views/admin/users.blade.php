@@ -21,9 +21,6 @@
                 </div>
                 
                 <nav class="hidden md:flex space-x-8">
-                    <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Home</a>
-                    <a href="/books" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Books</a>
-                    <a href="/books/dashboard" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">My Books</a>
                     <a href="/admin/dashboard" class="text-blue-600 font-semibold relative group">
                         Admin
                         <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 transform scale-x-100 transition-transform"></span>
@@ -37,9 +34,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
-        <!-- Hero Section -->
         <div class="text-center mb-12">
             <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-lg mb-6">
                 <i class="fas fa-users text-3xl text-blue-600"></i>
@@ -84,7 +79,6 @@
             </div>
         </div>
 
-        <!-- Back Button -->
         <div class="mt-8 text-center">
             <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all">
                 <i class="fas fa-arrow-left mr-3"></i>

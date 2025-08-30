@@ -36,7 +36,6 @@
 
     <main class="container mx-auto px-6 py-12">
    
-        <!-- Quick Actions -->
         <div class="bg-white rounded-2xl shadow-lg p-8 mb-16">
             <h3 class="text-2xl font-semibold text-gray-800 mb-6 font-['Playfair_Display']">Quick Actions</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
