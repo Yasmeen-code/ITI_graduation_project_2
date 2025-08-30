@@ -25,6 +25,12 @@
                         Admin
                         <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 transform scale-x-100 transition-transform"></span>
                     </a>
+                                    <form method="POST" action="{{ route('logout') }}" class="hidden md:block">
+                    @csrf
+                    <button type="submit" class="text-gray-600 hover:text-red-600 transition-colors font-medium">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </form>
                 </nav>
                 
                 <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
