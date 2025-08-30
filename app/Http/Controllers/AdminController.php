@@ -37,10 +37,15 @@ class AdminController extends Controller
         ]);
     }
 
-    public function users()
+    public function users(Request $request)
     {
-        $users = User::all();
-        return view('admin.users', compact('users'));
+        $search = $request->input('search');
+
+        $users = User::when($search, function ($query, $search) {
+            return $query->where('id', $search);
+        })->get();
+
+        return view('admin.users', compact('users', 'search'));
     }
 
     public function books()
@@ -78,7 +83,6 @@ class AdminController extends Controller
 
         $data = $validator->validated();
 
-        // Handle image upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -118,13 +122,11 @@ class AdminController extends Controller
 
         $data = $validator->validated();
 
-        // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($book->image && file_exists(public_path('images/' . $book->image))) {
                 unlink(public_path('images/' . $book->image));
             }
-            
+
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('images'), $imageName);
@@ -140,15 +142,51 @@ class AdminController extends Controller
     public function destroyBook($id)
     {
         $book = Book::findOrFail($id);
-        
-        // Delete associated image if exists
+
         if ($book->image && file_exists(public_path('images/' . $book->image))) {
             unlink(public_path('images/' . $book->image));
         }
-        
+
         $book->delete();
 
         return redirect()->route('admin.books')
             ->with('success', 'Book deleted successfully!');
+    }
+
+    public function userDetails($id)
+    {
+        $user = User::with('borrowedBooks.book')->findOrFail($id);
+        return view('admin.user_details', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Prevent admin from updating other admin profiles
+        if ($user->role === 'admin' && $request->id && $request->id != $user->id) {
+            return redirect()->back()->withErrors(['error' => 'You cannot update other admin profiles.']);
+        }
+
+        $user->update($validator->validated());
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', 'Profile updated successfully!');
+    }
+
+    public function profile()
+    {
+        return view('admin.profile');
     }
 }

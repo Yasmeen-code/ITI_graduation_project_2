@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/books/{id}/edit', [AdminController::class, 'editBook'])->name('admin.books.edit')->middleware('admin');
     Route::put('/admin/books/{id}/update', [AdminController::class, 'updateBook'])->name('admin.books.update')->middleware('admin');
     Route::delete('/admin/books/{id}/destroy', [AdminController::class, 'destroyBook'])->name('admin.books.destroy')->middleware('admin');
+
+    // Admin User routes
+    Route::get('/admin/users/{id}/details', [AdminController::class, 'userDetails'])->name('admin.user.details')->middleware('admin');
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile')->middleware('admin');
+    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update')->middleware('admin');
 });
 
 require __DIR__ . '/auth.php';
