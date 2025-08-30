@@ -22,9 +22,6 @@ class Book extends Model
         'image',
     ];
 
-    /**
-     * Get the borrowed books for this book.
-     */
     public function borrowedBooks()
     {
         return $this->hasMany(BorrowedBook::class);

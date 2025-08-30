@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display the admin dashboard.
-     */
     public function dashboard()
     {
         $totalBooks = Book::count();
@@ -39,27 +36,18 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of all users.
-     */
     public function users()
     {
         $users = User::all();
         return view('admin.users', compact('users'));
     }
 
-    /**
-     * Display a listing of all books.
-     */
     public function books()
     {
         $books = Book::all();
         return view('admin.books', compact('books'));
     }
 
-    /**
-     * Display a listing of all borrowed books.
-     */
     public function borrowedBooks()
     {
         $borrowedBooks = BorrowedBook::with('book', 'user')->get();
