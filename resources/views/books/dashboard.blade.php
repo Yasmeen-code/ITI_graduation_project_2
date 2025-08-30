@@ -43,9 +43,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
-        <!-- Hero Section -->
         <div class="text-center mb-16">
             <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-lg mb-6">
                 <i class="fas fa-book-reader text-3xl text-blue-600"></i>
@@ -58,7 +56,6 @@
             </p>
         </div>
 
-        <!-- Stats Cards -->
         <center>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
@@ -96,7 +93,6 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                         @foreach($borrowedBooks as $borrowedBook)
                             <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-                                <!-- Book Cover -->
                                 <div class="mb-6 text-center">
                                     @if($borrowedBook->book->image)
                                         <img src="{{ asset($borrowedBook->book->image) }}" alt="{{ $borrowedBook->book->title }}" class="w-32 h-40 rounded-xl object-cover mx-auto shadow-lg" />
@@ -107,7 +103,6 @@
                                     @endif
                                 </div>
                                 
-                                <!-- Book Details -->
                                 <div class="mb-6">
                                     <h4 class="text-xl font-semibold text-gray-800 mb-2 font-['Playfair_Display']">
                                         {{ $borrowedBook->book->title }}
@@ -118,7 +113,6 @@
                                     </p>
                                 </div>
                                 
-                                <!-- Borrowing Info -->
                                 <div class="space-y-3 mb-6">
                                     <div class="flex justify-between items-center">
                                         <span class="text-sm text-gray-600 font-medium">Borrowed:</span>
@@ -136,7 +130,6 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Action Button -->
                                 <form action="{{ route('books.return', $borrowedBook) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all font-semibold text-sm">

@@ -33,10 +33,8 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
         <div class="max-w-4xl mx-auto">
-            <!-- Breadcrumb -->
             <nav class="flex mb-8" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
@@ -57,7 +55,6 @@
             <!-- Book Details Card -->
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-3">
-                    <!-- Book Cover -->
                     <div class="lg:col-span-1 bg-gradient-to-br from-blue-500 to-purple-600 p-12 flex items-center justify-center">
                         <div class="text-center">
                             @if($book->images && count($book->images) > 0)
@@ -78,7 +75,6 @@
                         </div>
                     </div>
                     
-                    <!-- Book Information -->
                     <div class="lg:col-span-2 p-8">
                         <h1 class="text-3xl font-bold text-gray-800 mb-4 font-['Playfair_Display']">{{ $book->title }}</h1>
                         
@@ -96,7 +92,6 @@
                             </div>
                         @endif
                         
-                        <!-- Book Stats -->
                         <div class="grid grid-cols-2 gap-6 mb-8">
                             <div class="text-center p-4 bg-blue-50 rounded-xl">
                                 <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
@@ -117,7 +112,6 @@
                             </div>
                         </div>
                         
-                        <!-- Action Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4">
                             @if($book->available_copies > 0)
                                 <form action="{{ route('books.borrow', $book) }}" method="POST" class="flex-1">
@@ -145,7 +139,6 @@
                 </div>
             </div>
 
-            <!-- Additional Information -->
             <div class="mt-8 bg-white rounded-2xl shadow-lg p-8">
                 <h3 class="text-xl font-semibold text-gray-800 mb-6 font-['Playfair_Display']">Book Information</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

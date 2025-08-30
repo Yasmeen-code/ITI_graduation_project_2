@@ -36,9 +36,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
-        <!-- Hero Section -->
         <div class="text-center mb-16">
             <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-lg mb-6">
                 <i class="fas fa-book text-3xl text-blue-600"></i>
@@ -57,7 +55,6 @@
             @if($books->count() > 0)
                 @foreach($books as $book)
                     <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2">
-                        <!-- Book Cover -->
                         <div class="h-60 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                             <div class="absolute top-4 right-4">
@@ -78,7 +75,6 @@
                             </div>
                         </div>
                         
-                        <!-- Book Details -->
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                                 {{ $book->title }}
@@ -130,7 +126,6 @@
             @endif
         </div>
 
-        <!-- Call to Action -->
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
             <h3 class="text-3xl font-bold mb-4 font-['Playfair_Display']">Ready to Start Reading?</h3>
             <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
