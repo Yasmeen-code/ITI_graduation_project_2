@@ -51,7 +51,19 @@
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                 Manage all books in your library collection
             </p>
+            <div class="mt-6">
+                <a href="{{ route('admin.books.create') }}" class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all">
+                    <i class="fas fa-plus mr-3"></i>
+                    Add New Book
+                </a>
+            </div>
         </div>
+
+        @if (session('success'))
+            <div class="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <!-- Books Table -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -64,6 +76,7 @@
                             <th class="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Author</th>
                             <th class="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Available Copies</th>
                             <th class="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Created At</th>
+                            <th class="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -78,6 +91,20 @@
                                 </span>
                             </td>
                             <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">{{ $book->created_at->format('M d, Y') }}</td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm">
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('admin.books.edit', $book->id) }}" class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form action="{{ route('admin.books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-800">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

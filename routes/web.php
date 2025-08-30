@@ -37,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users')->middleware('admin');
     Route::get('/admin/books', [AdminController::class, 'books'])->name('admin.books')->middleware('admin');
     Route::get('/admin/borrowed-books', [AdminController::class, 'borrowedBooks'])->name('admin.borrowed_books')->middleware('admin');
+
+    // Admin Book CRUD routes
+    Route::get('/admin/books/create', [AdminController::class, 'createBook'])->name('admin.books.create')->middleware('admin');
+    Route::post('/admin/books/store', [AdminController::class, 'storeBook'])->name('admin.books.store')->middleware('admin');
+    Route::get('/admin/books/{id}/edit', [AdminController::class, 'editBook'])->name('admin.books.edit')->middleware('admin');
+    Route::put('/admin/books/{id}/update', [AdminController::class, 'updateBook'])->name('admin.books.update')->middleware('admin');
+    Route::delete('/admin/books/{id}/destroy', [AdminController::class, 'destroyBook'])->name('admin.books.destroy')->middleware('admin');
 });
 
 require __DIR__ . '/auth.php';
