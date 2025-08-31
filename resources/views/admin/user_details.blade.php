@@ -210,11 +210,6 @@
                 Back to Users
             </a>
 
-            <a href="/admin/users/{{ $user->id }}/edit"
-               class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl text-center hover:from-blue-600 hover:to-purple-700 transition-all font-semibold">
-                <i class="fas fa-edit mr-3"></i>
-                Edit User
-            </a>
         </div>
     </div>
 @endsection
