@@ -209,7 +209,6 @@
                 <i class="fas fa-arrow-left mr-3"></i>
                 Back to Users
             </a>
-
         </div>
     </div>
 @endsection

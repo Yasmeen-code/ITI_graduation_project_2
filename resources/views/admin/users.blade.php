@@ -42,7 +42,6 @@
             </form>
         </div>
 
-        <!-- Users Table -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full">
