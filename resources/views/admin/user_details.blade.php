@@ -11,7 +11,6 @@
 
 @section('content')
     <div class="max-w-4xl mx-auto">
-        <!-- Breadcrumb -->
         <nav class="flex mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
                 <li class="inline-flex items-center">
@@ -35,7 +34,6 @@
             </ol>
         </nav>
 
-        <!-- User Profile Card -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
             <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white">
                 <div class="flex items-center space-x-6">
@@ -58,7 +56,6 @@
 
             <div class="p-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Personal Information -->
                     <div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-6 font-['Playfair_Display']">Personal Information</h3>
                         <div class="space-y-4">
@@ -94,7 +91,6 @@
                         </div>
                     </div>
 
-                    <!-- Account Statistics -->
                     <div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-6 font-['Playfair_Display']">Account Statistics</h3>
                         <div class="space-y-4">
@@ -207,7 +203,6 @@
             </div>
         </div>
 
-        <!-- Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 mt-8">
             <a href="/admin/users"
                class="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-xl text-center hover:bg-gray-200 transition-colors font-semibold">
