@@ -74,7 +74,7 @@
                     <ul class="space-y-2 text-gray-400">
                         <li class="flex items-center">
                             <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                            <span>YasmeenHana@BookStore.com</span>
+                            <span>HanaYasmeen@BookStore.com</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone mr-3 text-blue-400"></i>
