@@ -51,13 +51,17 @@ class AdminController extends Controller
     public function storeBook(Request $request)
     {
         $data = $this->validateBook($request);
+
         if ($request->hasFile('image')) {
-            $data['image'] = $this->handleImageUpload($request->file('image'));
+            $imageName = $this->handleImageUpload($request->file('image'));
+            $data['image'] = 'images/' . $imageName;
         }
+
         Book::create($data);
 
         return redirect()->route('admin.books')->with('success', 'Book created successfully!');
     }
+
 
     public function editBook(Book $book)
     {
