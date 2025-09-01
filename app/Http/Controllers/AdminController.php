@@ -6,58 +6,41 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\BorrowedBook;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        $totalBooks = Book::count();
-        $totalUsers = User::count();
-        $activeLoans = BorrowedBook::where('return_by', '>', now())->count();
-        $overdueBooks = BorrowedBook::where('return_by', '<', now())->count();
-
-        $recentActivities = BorrowedBook::with('book', 'user')
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get()
-            ->map(function ($borrowedBook) {
-                return (object) [
-                    'description' => "{$borrowedBook->user->name} borrowed '{$borrowedBook->book->title}'",
-                    'created_at' => $borrowedBook->created_at
-                ];
-            });
-
         return view('admin.dashboard', [
-            'totalBooks' => $totalBooks,
-            'totalUsers' => $totalUsers,
-            'activeLoans' => $activeLoans,
-            'overdueBooks' => $overdueBooks,
-            'recentActivities' => $recentActivities
+            'totalBooks'      => Book::count(),
+            'totalUsers'      => User::count(),
+            'activeLoans'     => BorrowedBook::where('return_by', '>', now())->count(),
+            'overdueBooks'    => BorrowedBook::where('return_by', '<', now())->count(),
+            'recentActivities' => BorrowedBook::with('book', 'user')
+                ->latest()
+                ->take(5)
+                ->get()
+                ->map(fn($b) => (object)[
+                    'description' => "{$b->user->name} borrowed '{$b->book->title}'",
+                    'created_at'  => $b->created_at
+                ])
         ]);
     }
 
     public function users(Request $request)
     {
-        $search = $request->input('search');
-
-        $users = User::when($search, function ($query, $search) {
-            return $query->where('id', $search);
-        })->get();
-
-        return view('admin.users', compact('users', 'search'));
+        $users = User::when($request->search, fn($q, $s) => $q->where('id', $s))->get();
+        return view('admin.users', ['users' => $users, 'search' => $request->search]);
     }
 
     public function books()
     {
-        $books = Book::all();
-        return view('admin.books', compact('books'));
+        return view('admin.books', ['books' => Book::all()]);
     }
 
     public function borrowedBooks()
     {
-        $borrowedBooks = BorrowedBook::with('book', 'user')->get();
-        return view('admin.borrowed_books', compact('borrowedBooks'));
+        return view('admin.borrowed_books', ['borrowedBooks' => BorrowedBook::with('book', 'user')->get()]);
     }
 
     public function createBook()
@@ -67,126 +50,95 @@ class AdminController extends Controller
 
     public function storeBook(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'available_copies' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $data = $validator->validated();
-
+        $data = $this->validateBook($request);
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $data['image'] = $imageName;
+            $data['image'] = $this->handleImageUpload($request->file('image'));
         }
-
         Book::create($data);
 
-        return redirect()->route('admin.books')
-            ->with('success', 'Book created successfully!');
+        return redirect()->route('admin.books')->with('success', 'Book created successfully!');
     }
 
-    public function editBook($id)
+    public function editBook(Book $book)
     {
-        $book = Book::findOrFail($id);
         return view('admin.books_edit', compact('book'));
     }
 
-    public function updateBook(Request $request, $id)
+    public function updateBook(Request $request, Book $book)
     {
-        $book = Book::findOrFail($id);
-
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'available_copies' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $data = $validator->validated();
-
+        $data = $this->validateBook($request);
         if ($request->hasFile('image')) {
-            if ($book->image && file_exists(public_path('images/' . $book->image))) {
-                unlink(public_path('images/' . $book->image));
-            }
-
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $data['image'] = $imageName;
+            $data['image'] = $this->handleImageUpload($request->file('image'), $book->image);
         }
-
         $book->update($data);
 
-        return redirect()->route('admin.books')
-            ->with('success', 'Book updated successfully!');
+        return redirect()->route('admin.books')->with('success', 'Book updated successfully!');
     }
 
-    public function destroyBook($id)
+    public function destroyBook(Book $book)
     {
-        $book = Book::findOrFail($id);
-
-        if ($book->image && file_exists(public_path('images/' . $book->image))) {
-            unlink(public_path('images/' . $book->image));
+        if ($book->image) {
+            $this->deleteImage($book->image);
         }
-
         $book->delete();
 
-        return redirect()->route('admin.books')
-            ->with('success', 'Book deleted successfully!');
+        return redirect()->route('admin.books')->with('success', 'Book deleted successfully!');
     }
 
-    public function userDetails($id)
+    public function userDetails(User $user)
     {
-        $user = User::with('borrowedBooks.book')->findOrFail($id);
+        $user->load('borrowedBooks.book');
         return view('admin.user_details', compact('user'));
     }
 
     public function updateProfile(Request $request)
     {
         $user = $request->user();
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+        $data = $request->validate([
+            'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        // Prevent admin from updating other admin profiles
         if ($user->role === 'admin' && $request->id && $request->id != $user->id) {
-            return redirect()->back()->withErrors(['error' => 'You cannot update other admin profiles.']);
+            return back()->withErrors(['error' => 'You cannot update other admin profiles.']);
         }
 
-        $user->update($validator->validated());
+        $user->update($data);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Profile updated successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Profile updated successfully!');
     }
 
     public function profile()
     {
         return view('admin.profile');
+    }
+
+    private function validateBook(Request $request)
+    {
+        return $request->validate([
+            'title'            => 'required|string|max:255',
+            'author'           => 'required|string|max:255',
+            'description'      => 'nullable|string',
+            'available_copies' => 'required|integer|min:0',
+            'image'            => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    }
+
+    private function handleImageUpload($image, $oldImage = null)
+    {
+        if ($oldImage) $this->deleteImage($oldImage);
+
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
+
+        return $imageName;
+    }
+
+    private function deleteImage($image)
+    {
+        $path = public_path('images/' . $image);
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 }
